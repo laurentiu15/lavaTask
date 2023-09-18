@@ -2,7 +2,6 @@
 // SPDX-License-Identifier: Apache-2.0
 
 /* eslint-disable no-console */
-
 import dotenv from "dotenv";
 dotenv.config();
 
@@ -43,34 +42,28 @@ export const fungibleStore = "0x1::fungible_asset::FungibleStore";
   await faucetClient.fundAccount(alice.address(), 100_000_000);
   await faucetClient.fundAccount(bob.address(), 0); // <:!:section_3
 
-  // Print out initial balances.
-  console.log("=== Initial Balances ===");
-  // :!:>section_4
-  console.log(`Alice: ${await coinClient.checkBalance(alice)}`);
-  console.log(`Bob: ${await coinClient.checkBalance(bob)}`); // <:!:section_4
-  console.log("");
+  console.log("======== ITERATE 100 times and check Balance for Alice ==================")
+  let valid = 0
+  let error = 0
+  for (let i = 0; i < 100; i++) {
+    try {
+      console.log(`Request ${i}`);
+      valid=valid+1;
+    } catch(err) {
+      error=error+1;    }
+  }
+  console.log(`From those 100 requests, ${valid} are valid and ${error} are errors`);
 
-  // Have Alice send Bob some AptosCoins.
-  // :!:>section_5
-  let txnHash = await coinClient.transfer(alice, bob, 1_000, { gasUnitPrice: BigInt(100) }); // <:!:section_5
-  // :!:>section_6a
-  await client.waitForTransaction(txnHash); // <:!:section_6a
-
-  // Print out intermediate balances.
-  console.log("=== Intermediate Balances ===");
-  console.log(`Alice: ${await coinClient.checkBalance(alice)}`);
-  console.log(`Bob: ${await coinClient.checkBalance(bob)}`);
-  console.log("");
-
-  // Have Alice send Bob some more AptosCoins.
-  txnHash = await coinClient.transfer(alice, bob, 1_000, { gasUnitPrice: BigInt(100) });
-  // :!:>section_6b
-  await client.waitForTransaction(txnHash, { checkSuccess: true }); // <:!:section_6b
-
-  // Print out final balances.
-  console.log("=== Final Balances ===");
-  console.log(`Alice: ${await coinClient.checkBalance(alice)}`);
-  console.log(`Bob: ${await coinClient.checkBalance(bob)}`);
-  console.log("");
+  console.log("======== ITERATE 100 times and check Balance for Bob ==================")
+  valid=0;
+  error=0;
+  for (let i = 0; i < 100; i++) {
+    try {
+      console.log(`Request ${i}`);
+      valid=valid+1;
+    } catch(err) {
+      error=error+1;    }
+  }
+  console.log(`From those 100 requests, ${valid} are valid and ${error} are errors`);
 })();
 
