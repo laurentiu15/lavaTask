@@ -72,10 +72,5 @@ export const fungibleStore = "0x1::fungible_asset::FungibleStore";
   console.log(`Alice: ${await coinClient.checkBalance(alice)}`);
   console.log(`Bob: ${await coinClient.checkBalance(bob)}`);
   console.log("");
-
-  console.log("=================== GET ACCOUNT RESOURCES ===========================")
-  
-  const accountResource = await client.getAccountResource(alice.address(),APTOS_COIN);
-  console.log(accountResource)
 })();
 

@@ -1,2 +1,2 @@
-# lavaTask
-lava assignment
+# run tests
+npm run lava 
